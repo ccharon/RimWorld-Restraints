@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <Restraints.TryToRestrain>Try to restrain {0_label}</Restraints.TryToRestrain>    
+    <Restraints.Remove>Remove restraints from {0_label}</Restraints.Remove>    
+    <Restraints.NeedSteel>Need steel to make restraints.</Restraints.NeedSteel>
+</LanguageData>

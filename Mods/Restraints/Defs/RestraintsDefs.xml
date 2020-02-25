@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <JobDef>
+        <defName>bdew_restraints_add</defName>
+        <driverClass>Restraints.JobDriver_Restrain</driverClass>
+        <reportString>Restraining TargetA.</reportString>
+        <suspendable>false</suspendable>
+    </JobDef>
+
+    <JobDef>
+        <defName>bdew_restraints_free</defName>
+        <driverClass>Restraints.JobDriver_RemoveRestraints</driverClass>
+        <reportString>Freeing TargetA.</reportString>
+        <suspendable>false</suspendable>
+    </JobDef>
+
+    <HediffDef>
+        <defName>bdew_restraints</defName>
+        <label>restrained</label>
+        <defaultLabelColor>(0.7,0.0,0.7)</defaultLabelColor>
+        <initialSeverity>1</initialSeverity>
+        <everCurableByItem>false</everCurableByItem>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <offset>-10</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+	<description>Has been restrained and is unable to move.</description>
+    </HediffDef>
+
+    <ThoughtDef>
+        <defName>bdew_restraints_thought</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>bdew_restraints</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <stages>
+            <li>
+                <label>restrained</label>
+                <description>Let me out!</description>
+                <baseMoodEffect>-35</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>bdew_restraints_memory</defName>
+        <durationDays>5</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>was restrained</label>
+                <description>The colony had me in restraints for a while, like a rabid dog!</description>
+                <baseMoodEffect>-30</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+</Defs>

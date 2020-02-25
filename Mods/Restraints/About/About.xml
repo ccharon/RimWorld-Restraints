@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Restraints</name>
+	<author>bdew</author>
+	<packageId>BDew.Restraints</packageId>
+	<supportedVersions>
+	  <li>1.1</li>
+	</supportedVersions>
+	<modDependencies>
+	  <li>
+	    <packageId>UnlimitedHugs.HugsLib</packageId>
+	    <displayName>HugsLib</displayName>
+	    <steamWorkshopUrl>steam://steamcommunity.com/workshop/filedetails/?id=818773962</steamWorkshopUrl>
+	  </li>
+	</modDependencies>
+	<loadAfter>
+      <li>UnlimitedHugs.HugsLib</li>
+    </loadAfter>
+	<url>https://github.com/bdew-rw/Restraints</url>
+	<description>
+Adds ability to restrain prisoners and colonists from moving. A more humane version of cutting off both legs.
+
+To restraint or free a pawn, select another pawn and right click the one you want to restrain/free. 
+
+Restraining costs 1 piece of steel and can be applied to your own colonists (that aren't in a mental break) or prisoners. 
+
+Restraining a pawn that isn't already downed has a high chance to have them go berserk. 
+
+Restraining will apply a -35 moodlet while restrained, and -30 for 5 days after removing the restraitns.
+
+Requires HugsLib - https://steamcommunity.com/workshop/filedetails/?id=818773962
+	</description>
+</ModMetaData>
