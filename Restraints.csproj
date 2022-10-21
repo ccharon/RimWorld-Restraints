@@ -63,10 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Lib.Harmony">
-      <Version>2.1.0</Version>
+      <Version>2.2.2</Version>
     </PackageReference>
     <PackageReference Include="UnlimitedHugs.Rimworld.HugsLib">
-      <Version>8.0.0</Version>
+      <Version>9.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
