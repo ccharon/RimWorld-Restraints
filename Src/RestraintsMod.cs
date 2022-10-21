@@ -1,23 +1,18 @@
-﻿using HugsLib;
-using HugsLib.Settings;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace Restraints
 {
-    public class RestraintsMod : ModBase
+    public class RestraintsMod : Mod
     {
-        internal static HediffDef RestraintsHediff;
-        internal static JobDef RestrainJob, FreeJob;
-        internal static ThoughtDef RestrainsMemory;
-        
-        public override string ModIdentifier => "Restraints";
-        public override void DefsLoaded()
+        public RestraintsMod(ModContentPack content) : base(content)
         {
-            RestraintsHediff = HediffDef.Named("bdew_restraints");
-            RestrainJob = DefDatabase<JobDef>.GetNamed("bdew_restraints_add");
-            FreeJob = DefDatabase<JobDef>.GetNamed("bdew_restraints_free");
-            RestrainsMemory = ThoughtDef.Named("bdew_restraints_memory");
+
         }
+
+        internal static HediffDef RestraintsHediff => HediffDef.Named("bdew_restraints");
+        internal static JobDef RestrainJob => DefDatabase<JobDef>.GetNamed("bdew_restraints_add");
+        internal static JobDef FreeJob => DefDatabase<JobDef>.GetNamed("bdew_restraints_free");
+        internal static ThoughtDef RestrainsMemory => ThoughtDef.Named("bdew_restraints_memory");
     }
 }
