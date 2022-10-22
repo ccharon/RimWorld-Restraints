@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using Verse;
 
 namespace Restraints
@@ -7,7 +8,9 @@ namespace Restraints
     {
         public RestraintsMod(ModContentPack content) : base(content)
         {
-
+            var harmony = new Harmony("BDew.Restraints");
+            harmony.PatchAll();
+            Log.Message("Restraints loaded");
         }
 
         internal static HediffDef RestraintsHediff => HediffDef.Named("bdew_restraints");
