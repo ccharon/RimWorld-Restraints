@@ -20,7 +20,7 @@ namespace Restraints
 
             if (pawnIsNotAbleToRestrainOthers) return;
 
-            foreach (var dest in GenUI.TargetsAt(clickPos, Utils.RestrainTarget(pawn), true))
+            foreach (var dest in GenUI.TargetsAt(clickPos, RestrainTarget(pawn), true))
             {
                 if (!dest.HasThing) continue;
                 if (!(dest.Thing is Pawn target)) continue;
@@ -50,6 +50,20 @@ namespace Restraints
         {
             return new FloatMenuOption("Restraints.Remove".Translate(target),
                 () => { pawn.jobs.TryTakeOrderedJob(new Job(RestraintsMod.FreeJob, target)); });
+        }
+        
+        private static TargetingParameters RestrainTarget(Pawn performer)
+        {
+            return new TargetingParameters
+            {
+                canTargetPawns = true,
+                canTargetBuildings = false,
+                mapObjectTargetsMustBeAutoAttackable = false,
+                validator = target => target.HasThing 
+                                      && target.Thing is Pawn targetPawn 
+                                      && targetPawn != performer 
+                                      && (targetPawn.IsColonistPlayerControlled || targetPawn.IsPrisonerOfColony || targetPawn.IsSlaveOfColony)
+            };
         }
     }
 }

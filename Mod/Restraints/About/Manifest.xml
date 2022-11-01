@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Manifest>
+    <identifier>Restraints</identifier>
+    <version>1.0.0</version>
+    <dependencies />
+    <incompatibleWith />
+    <loadBefore />
+    <loadAfter />
+    <manifestUri>https://raw.githubusercontent.com/ccharon/RimWorld-Restraints/master/Mods/Restraints/About/Manifest.xml</manifestUri>
+    <downloadUri>https://github.com/ccharon/RimWorld-Restraints/releases</downloadUri>
+</Manifest>
