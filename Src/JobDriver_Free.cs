@@ -2,7 +2,6 @@
 using RimWorld;
 using Verse;
 using Verse.AI;
-using Verse.AI.Group;
 
 namespace Restraints
 {
@@ -12,9 +11,8 @@ namespace Restraints
     {
         private const TargetIndex PawnInd = TargetIndex.A;
 
-        private Pawn Target => (Pawn) job.GetTarget(PawnInd).Thing;
+        private Pawn Target => (Pawn)job.GetTarget(PawnInd).Thing;
 
-        
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             return pawn.Reserve(Target, job, 1, -1, null, errorOnFailed);
@@ -22,7 +20,6 @@ namespace Restraints
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-
             yield return Toils_Goto.GotoThing(PawnInd, PathEndMode.InteractionCell)
                 .FailOnDespawnedNullOrForbidden(PawnInd)
                 .FailOnSomeonePhysicallyInteracting(PawnInd)
@@ -37,13 +34,18 @@ namespace Restraints
             {
                 initAction = () =>
                 {
-                    Hediff hediff = Target.health.hediffSet.hediffs.Find(h => h.def == RestraintsMod.RestraintsHediff);
-                    if (hediff != null)
-                    {
-                        Target.health.RemoveHediff(hediff);
-                        Target.needs.mood.thoughts.memories.TryGainMemory(RestraintsMod.RestrainsMemory);
-                    }
-                } 
+                    var hediff = Target.health.hediffSet.hediffs.Find(
+                        h => h.def == RestraintsMod.RestraintsHediff 
+                             || h.def == RestraintsMod.RestraintsMasochistHediff);
+                    
+                    if (hediff == null) return;
+
+                    Target.health.RemoveHediff(hediff);
+                    Target.needs.mood.thoughts.memories.TryGainMemory(
+                        Target.story.traits.HasTrait(TraitDefOf.Masochist) 
+                            ? RestraintsMod.RestrainsMasochistMemory
+                            : RestraintsMod.RestrainsMemory);
+                }
             };
         }
     }

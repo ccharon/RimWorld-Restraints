@@ -2,7 +2,6 @@
 using RimWorld;
 using Verse;
 using Verse.AI;
-using Verse.AI.Group;
 
 namespace Restraints
 {
@@ -12,14 +11,15 @@ namespace Restraints
         private const TargetIndex PawnInd = TargetIndex.A;
         private const TargetIndex SteelInd = TargetIndex.B;
 
-        private Pawn Target => (Pawn) job.GetTarget(PawnInd).Thing;
+        private Pawn Target => job.GetTarget(PawnInd).Thing as Pawn;
 
         private Thing Steel => job.GetTarget(SteelInd).Thing;
 
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.Reserve(Target, job, 1, -1, null, errorOnFailed) && pawn.Reserve(Steel, job, 1, -1, null, errorOnFailed);
+            return pawn.Reserve(Target, job, 1, -1, null, errorOnFailed)
+                   && pawn.Reserve(Steel, job, 1, -1, null, errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -36,7 +36,7 @@ namespace Restraints
             yield return Toils_Haul.StartCarryThing(SteelInd, false, true, true)
                 .FailOnDestroyedNullOrForbidden(SteelInd);
 
-            Toil gotoToil = Toils_Goto.GotoThing(PawnInd, PathEndMode.ClosestTouch)
+            var gotoToil = Toils_Goto.GotoThing(PawnInd, PathEndMode.ClosestTouch)
                 .FailOnDespawnedNullOrForbidden(PawnInd)
                 .FailOnSomeonePhysicallyInteracting(PawnInd)
                 .FailOn(toil => !pawn.CanReach(Target, PathEndMode.ClosestTouch, Danger.Deadly));
@@ -52,16 +52,10 @@ namespace Restraints
             {
                 initAction = () =>
                 {
-                    if (!Target.Downed && Rand.Value > 0.3)
-                    {
-                        if (Target.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.Berserk))
-                        {
-                            pawn.jobs.EndCurrentJob(JobCondition.Incompletable);
-                            return;
-                        }
-                    }
+                    Target.health.AddHediff(Target.story.traits.HasTrait(TraitDefOf.Masochist) 
+                        ? RestraintsMod.RestraintsMasochistHediff
+                        : RestraintsMod.RestraintsHediff);
 
-                    Target.health.AddHediff(RestraintsMod.RestraintsHediff);
                     Steel.Destroy();
                 }
             };

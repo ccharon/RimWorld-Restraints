@@ -1,25 +1,21 @@
-﻿using System;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
-using Verse.AI;
 
 namespace Restraints
 {
-    public class Utils
+    public static class Utils
     {
         internal static TargetingParameters RestrainTarget(Pawn performer)
         {
-            return new TargetingParameters()
+            return new TargetingParameters
             {
                 canTargetPawns = true,
                 canTargetBuildings = false,
                 mapObjectTargetsMustBeAutoAttackable = false,
-                validator = target =>
-                {
-                    if (!target.HasThing)
-                        return false;
-                    return target.Thing is Pawn targetPawn && targetPawn != performer && (targetPawn.IsColonistPlayerControlled || targetPawn.IsPrisonerOfColony);
-                }
+                validator = target => target.HasThing 
+                                      && target.Thing is Pawn targetPawn 
+                                      && targetPawn != performer 
+                                      && (targetPawn.IsColonistPlayerControlled || targetPawn.IsPrisonerOfColony || targetPawn.IsSlaveOfColony)
             };
         }
     }
