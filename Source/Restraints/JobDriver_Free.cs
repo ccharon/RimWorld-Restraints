@@ -5,8 +5,6 @@ using Verse.AI;
 
 namespace Restraints
 {
-    // ReSharper disable once InconsistentNaming
-    // ReSharper disable once UnusedMember.Global
     public class JobDriver_RemoveRestraints : JobDriver
     {
         private const TargetIndex PawnInd = TargetIndex.A;
@@ -35,14 +33,14 @@ namespace Restraints
                 initAction = () =>
                 {
                     var hediff = Target.health.hediffSet.hediffs.Find(
-                        h => h.def == RestraintsMod.RestraintsHediff 
+                        h => h.def == RestraintsMod.RestraintsHediff
                              || h.def == RestraintsMod.RestraintsMasochistHediff);
-                    
+
                     if (hediff == null) return;
 
                     Target.health.RemoveHediff(hediff);
                     Target.needs.mood.thoughts.memories.TryGainMemory(
-                        Target.story.traits.HasTrait(TraitDefOf.Masochist) 
+                        Target.story.traits.HasTrait(TraitDefOf.Masochist)
                             ? RestraintsMod.RestrainsMasochistMemory
                             : RestraintsMod.RestrainsMemory);
                 }

@@ -5,7 +5,6 @@ using Verse.AI;
 
 namespace Restraints
 {
-    // ReSharper disable once InconsistentNaming
     public class JobDriver_Restrain : JobDriver
     {
         private const TargetIndex PawnInd = TargetIndex.A;
