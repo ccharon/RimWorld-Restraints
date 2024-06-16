@@ -51,7 +51,7 @@ namespace Restraints
             {
                 initAction = () =>
                 {
-                    Target.health.AddHediff(Target.story.traits.HasTrait(TraitDefOf.Masochist) 
+                    Target.health.AddHediff(Target.story.traits.HasTrait(TraitDef.Named("Masochist"))
                         ? RestraintsMod.RestraintsMasochistHediff
                         : RestraintsMod.RestraintsHediff);
 

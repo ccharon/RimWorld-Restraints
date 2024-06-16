@@ -40,7 +40,7 @@ namespace Restraints
 
                     Target.health.RemoveHediff(hediff);
                     Target.needs.mood.thoughts.memories.TryGainMemory(
-                        Target.story.traits.HasTrait(TraitDefOf.Masochist)
+                        Target.story.traits.HasTrait(TraitDef.Named("Masochist"))
                             ? RestraintsMod.RestrainsMasochistMemory
                             : RestraintsMod.RestrainsMemory);
                 }
